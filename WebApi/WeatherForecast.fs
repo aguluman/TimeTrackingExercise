@@ -1,4 +1,4 @@
-namespace TimeTrackingExercise
+namespace WebApi
 
 open System
 

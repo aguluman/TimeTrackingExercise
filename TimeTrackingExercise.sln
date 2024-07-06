@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TimeTrackingExercise", "TimeTrackingExercise.fsproj", "{7E7FDC3C-4090-42BA-9297-B54FBF282CF3}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebApi", "WebApi\WebApi.fsproj", "{7E7FDC3C-4090-42BA-9297-B54FBF282CF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

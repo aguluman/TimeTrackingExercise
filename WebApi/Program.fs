@@ -1,4 +1,4 @@
-namespace TimeTrackingExercise
+namespace WebApi
 #nowarn "20"
 open System
 open System.Collections.Generic
