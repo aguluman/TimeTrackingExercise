@@ -1,4 +1,4 @@
-namespace WebApi
+namespace Registration
 
 open System
 

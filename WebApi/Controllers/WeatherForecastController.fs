@@ -6,7 +6,7 @@ open System.Linq
 open System.Threading.Tasks
 open Microsoft.AspNetCore.Mvc
 open Microsoft.Extensions.Logging
-open WebApi
+open Registration
 
 [<ApiController>]
 [<Route("[controller]")>]
