@@ -17,6 +17,7 @@ open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Hosting
 open Microsoft.Extensions.Logging
 open Registration
+open WebApi.Controllers
 
 module Program =
     let exitCode = 0
@@ -29,9 +30,17 @@ module Program =
         let registrationAssemblyPart =
             typeof<WeatherForecast>.Assembly |> AssemblyPart
 
-        builder.Services
-            .AddControllers()
-            .PartManager.ApplicationParts.Add registrationAssemblyPart
+        let accountingAssemblyPart =
+            typeof<AccountingController>.Assembly |> AssemblyPart
+
+        let parts =
+            builder.Services
+                .AddControllers()
+                .PartManager
+                .ApplicationParts
+
+        parts.Add(registrationAssemblyPart)
+        parts.Add(accountingAssemblyPart)
 
         let app = builder.Build()
 

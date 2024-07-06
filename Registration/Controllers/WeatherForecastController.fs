@@ -9,7 +9,7 @@ open Microsoft.Extensions.Logging
 open Registration
 
 [<ApiController>]
-[<Route("[controller]")>]
+[<Route("[weather]")>]
 type WeatherForecastController (logger : ILogger<WeatherForecastController>) =
     inherit ControllerBase()
 
@@ -29,10 +29,10 @@ type WeatherForecastController (logger : ILogger<WeatherForecastController>) =
 
     [<HttpGet>]
     member _.Get() =
-        let rng = System.Random()
+        let rng = Random()
         [|
             for index in 0..4 ->
                 { Date = DateTime.Now.AddDays(float index)
                   TemperatureC = rng.Next(-20,55)
-                  Summary = summaries.[rng.Next(summaries.Length)] }
+                  Summary = summaries[rng.Next(summaries.Length)] }
         |]

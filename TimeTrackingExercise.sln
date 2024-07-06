@@ -4,6 +4,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebApi", "WebApi\WebApi.fsp
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Registration", "Registration\Registration.fsproj", "{2A65624D-D252-4731-8FFF-244C9C277E8F}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Accounting", "Accounting\Accounting.fsproj", "{4D13647D-44D9-4994-86D4-135634F915B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{2A65624D-D252-4731-8FFF-244C9C277E8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A65624D-D252-4731-8FFF-244C9C277E8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A65624D-D252-4731-8FFF-244C9C277E8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D13647D-44D9-4994-86D4-135634F915B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D13647D-44D9-4994-86D4-135634F915B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D13647D-44D9-4994-86D4-135634F915B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D13647D-44D9-4994-86D4-135634F915B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
