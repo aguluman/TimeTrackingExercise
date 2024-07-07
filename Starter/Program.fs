@@ -1,4 +1,4 @@
-namespace WebApi
+namespace Starter
 
 #nowarn "20"
 
@@ -17,13 +17,18 @@ open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Hosting
 open Microsoft.Extensions.Logging
 open Registration
-open WebApi.Controllers
-
+open Accounting
 module Program =
     let exitCode = 0
 
+    let CreateHostBuilder args =
+        Host
+            .CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(fun webBuilder -> webBuilder.UseStartup<StartupBase>() |> ignore)
+
     [<EntryPoint>]
     let main args =
+        CreateHostBuilder(args).Build().Run()
 
         let builder = WebApplication.CreateBuilder(args)
 
@@ -31,7 +36,7 @@ module Program =
             typeof<WeatherForecast>.Assembly |> AssemblyPart
 
         let accountingAssemblyPart =
-            typeof<AccountingController>.Assembly |> AssemblyPart
+            typeof<AccountingId>.Assembly |> AssemblyPart
 
         let parts =
             builder.Services

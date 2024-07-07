@@ -5,7 +5,8 @@
     </PropertyGroup>
     
     <ItemGroup>
-      <Compile Include="Controllers\AccountingController.fs" />
+      <Compile Include="Models.fs" />
+      <Compile Include="Api.fs" />
     </ItemGroup>
 
     <ItemGroup>

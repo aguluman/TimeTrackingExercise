@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebApi", "WebApi\WebApi.fsproj", "{7E7FDC3C-4090-42BA-9297-B54FBF282CF3}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Starter", "Starter\Starter.fsproj", "{7E7FDC3C-4090-42BA-9297-B54FBF282CF3}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Registration", "Registration\Registration.fsproj", "{2A65624D-D252-4731-8FFF-244C9C277E8F}"
 EndProject

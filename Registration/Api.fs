@@ -1,4 +1,4 @@
-﻿namespace WebApi.Controllers
+﻿namespace Registration
 
 open System
 open System.Collections.Generic

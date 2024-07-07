@@ -1,4 +1,4 @@
-﻿namespace WebApi.Controllers
+﻿namespace Accounting
 
 open Microsoft.AspNetCore.Mvc
 
