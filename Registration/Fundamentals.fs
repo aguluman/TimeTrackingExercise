@@ -1,3 +1,4 @@
 ﻿namespace Registration
 
-type Instant = Instant of NodaTime.Instant
+module Fundamentals =
+    type Instant = Instant of NodaTime.Instant

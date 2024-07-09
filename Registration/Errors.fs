@@ -1,7 +1,7 @@
 ﻿namespace Registration
 
 type RegistrationError =
-    | UsernameAlreadyTaken
+    | EmailAlreadyRegistered
     | UserNotInVerificationProcess
     | WrongVerificationCode
 

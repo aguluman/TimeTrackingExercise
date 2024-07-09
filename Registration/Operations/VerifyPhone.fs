@@ -1,9 +1,9 @@
-﻿module Registration.Operations.VerifyPhone
+﻿namespace Registration.Operations
 
-open Registration
-open Registration.Verification
+open Registration.User.Model
+open Registration.Verification.Model
 
-type Data =
-    { Email: Email
-      VerificationCode: VerificationCode }
-
+module VerifyPhone =
+    type Data =
+        { Email: Email
+          VerificationCode: VerificationCode }

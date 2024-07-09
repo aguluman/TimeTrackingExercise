@@ -1,9 +1,10 @@
-﻿[<RequireQualifiedAccess>]
-module Registration.Operations.CompleteRegistration
+﻿namespace Registration.Operations
 
-open Registration
+open Registration.User.Model
 
-type Data =
-    { CompletionId: RegistrationCompletionId
-      FirstName: string
-      LastName: string }
+[<RequireQualifiedAccess>]
+module CompleteRegistration =
+    type Data =
+        { CompletionId: RegistrationCompletionId
+          FirstName: string
+          LastName: string }
