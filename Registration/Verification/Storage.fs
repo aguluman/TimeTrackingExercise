@@ -1,6 +1,6 @@
 ﻿namespace Registration.Verification
 
-open Registration.User.Model
+open Registration.User.Events
 open Registration.Verification.Model
 
 type OpenVerificationStorage =

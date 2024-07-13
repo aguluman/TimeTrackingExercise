@@ -3,7 +3,8 @@
 open FsToolkit.ErrorHandling
 open Registration
 open Registration.Fundamentals
-open Registration.User.Model
+open Registration.User
+open Registration.User.Events
 open Registration.Verification.Model
 
 [<RequireQualifiedAccess>]

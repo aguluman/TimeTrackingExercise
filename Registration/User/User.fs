@@ -1,6 +1,26 @@
 ﻿namespace Registration.User
 
-open Registration.User.Model
+open Registration.User.Events
+
+type User =
+    { UserId: UserId
+      Email: Email
+      PasswordHash: PasswordHash
+      PhoneNumber: PhoneNumber
+      FirstName: string
+      LastName: string }
+
+type VerifyingUser =
+    { UserId: UserId
+      Email: Email
+      PhoneNumber: PhoneNumber
+      CompletionId: RegistrationCompletionId }
+
+type UserState =
+    | NotExisting
+    | InVerification of VerifyingUser
+    | Active of User
+    | Deactivated of User
 
 module User =
     let projectState (events: UserEvent list) =

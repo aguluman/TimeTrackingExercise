@@ -1,6 +1,6 @@
 ﻿namespace Registration.Operations
 
-open Registration.User.Model
+open Registration.User.Events
 
 [<RequireQualifiedAccess>]
 module CompleteRegistration =

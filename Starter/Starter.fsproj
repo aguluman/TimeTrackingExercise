@@ -5,6 +5,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="InMemoryFakes.fs" />
+        <Compile Include="Services.fs" />
+        <Compile Include="FacadesCreator.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
 

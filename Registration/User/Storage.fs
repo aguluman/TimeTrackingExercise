@@ -1,6 +1,6 @@
 ﻿namespace Registration.User
 
-open Registration.User.Model
+open Registration.User.Events
 
 type UserEventStorage =
     abstract PersistEvent: UserEvent -> Async<unit>

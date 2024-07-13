@@ -1,6 +1,6 @@
 namespace Registration.Verification
 
-open Registration.User.Model
+open Registration.User.Events
 
 module Model =
     type VerificationCode = VerificationCode of string
