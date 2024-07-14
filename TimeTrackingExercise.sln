@@ -6,6 +6,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Registration", "Registratio
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Accounting", "Accounting\Accounting.fsproj", "{4D13647D-44D9-4994-86D4-135634F915B5}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Frontend", "Frontend\Frontend.fsproj", "{3DDF030E-5715-4362-B804-9C0B8919A98C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{4D13647D-44D9-4994-86D4-135634F915B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D13647D-44D9-4994-86D4-135634F915B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D13647D-44D9-4994-86D4-135634F915B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DDF030E-5715-4362-B804-9C0B8919A98C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DDF030E-5715-4362-B804-9C0B8919A98C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DDF030E-5715-4362-B804-9C0B8919A98C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DDF030E-5715-4362-B804-9C0B8919A98C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

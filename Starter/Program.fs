@@ -2,9 +2,11 @@ namespace Starter
 
 #nowarn "20"
 
+open System.Reflection
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Mvc.ApplicationParts
 open Microsoft.Extensions.DependencyInjection
+open Microsoft.Extensions.FileProviders
 open Microsoft.Extensions.Hosting
 open Registration
 open Accounting
@@ -36,6 +38,12 @@ module Program =
         app.UseHttpsRedirection()
         app.UseRouting()
         app.UseAuthorization()
+
+        let frontendAssembly = Assembly.Load(AssemblyName("Frontend"))
+        let staticFileOptions = StaticFileOptions()
+        staticFileOptions.FileProvider <- EmbeddedFileProvider(frontendAssembly, "Frontend.wwwroot")
+
+        app.UseStaticFiles(staticFileOptions)
         app.MapControllers()
 
         app.Run()
