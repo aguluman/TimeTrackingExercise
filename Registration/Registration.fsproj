@@ -6,32 +6,31 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Fundamentals.fs" />
-        <Compile Include="User\Events.fs" />
-        <Compile Include="User\Storage.fs" />
-        <Compile Include="User\User.fs" />
-        <Compile Include="Verification\Model.fs" />
-        <Compile Include="Verification\Storage.fs" />
-        <Compile Include="Errors.fs" />
-        <Compile Include="Operations\StartRegistration.fs" />
-        <Compile Include="Operations\VerifyPhone.fs" />
-        <Compile Include="Operations\CompleteRegistration.fs" />
-        <Compile Include="Incoming.fs" />
-        <Compile Include="Facade.fs" />
-        <Compile Include="WebApi.fs" />
+        <Compile Include="Fundamentals.fs"/>
+        <Compile Include="User\Events.fs"/>
+        <Compile Include="User\Storage.fs"/>
+        <Compile Include="User\User.fs"/>
+        <Compile Include="Verification\Model.fs"/>
+        <Compile Include="Verification\Storage.fs"/>
+        <Compile Include="Errors.fs"/>
+        <Compile Include="Operations\StartRegistration.fs"/>
+        <Compile Include="Operations\VerifyPhone.fs"/>
+        <Compile Include="Operations\CompleteRegistration.fs"/>
+        <Compile Include="Incoming.fs"/>
+        <Compile Include="Facade.fs"/>
+        <Compile Include="WebApi.fs"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="FSharpx.Extras" Version="3.1.0" />
-      <PackageReference Include="FsToolkit.ErrorHandling" Version="4.15.2" />
-      <PackageReference Include="FsToolkit.ErrorHandling.TaskResult" Version="4.15.2" />
-      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-      <PackageReference Include="NodaTime" Version="3.1.11" />
+        <PackageReference Include="FSharpx.Extras" Version="3.1.0"/>
+        <PackageReference Include="FsToolkit.ErrorHandling" Version="4.15.2"/>
+        <PackageReference Include="FsToolkit.ErrorHandling.TaskResult" Version="4.15.2"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5"/>
+        <PackageReference Include="NodaTime" Version="3.1.11"/>
     </ItemGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="Properties\launchSettings.json" />
+        <EmbeddedResource Include="wwwroot\**\*" />
     </ItemGroup>
-    
 
 </Project>

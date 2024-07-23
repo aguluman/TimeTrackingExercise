@@ -39,9 +39,18 @@ module Program =
         app.UseRouting()
         app.UseAuthorization()
 
-        let frontendAssembly = Assembly.Load(AssemblyName("Frontend"))
-        let staticFileOptions = StaticFileOptions()
-        staticFileOptions.FileProvider <- EmbeddedFileProvider(frontendAssembly, "Frontend.wwwroot")
+        let getFileProvider assemblyName =
+            let assembly = Assembly.Load(AssemblyName(assemblyName))
+            EmbeddedFileProvider(assembly, $"{assemblyName}.wwwroot")
+
+        let staticFileOptions =
+            StaticFileOptions(
+                FileProvider =
+                    CompositeFileProvider(
+                        getFileProvider "Registration"
+                        getFileProvider "Accounting"
+                    )
+            )
 
         app.UseStaticFiles(staticFileOptions)
         app.MapControllers()
