@@ -4,18 +4,14 @@
         <TargetFramework>net8.0</TargetFramework>
         <OutputType>Library</OutputType>
     </PropertyGroup>
-    
+
     <ItemGroup>
-      <Compile Include="Models.fs" />
-      <Compile Include="Api.fs" />
+        <Compile Include="Models.fs"/>
+        <Compile Include="Api.fs"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="Properties\launchSettings.json" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5"/>
     </ItemGroup>
 
 </Project>

@@ -2,11 +2,9 @@ namespace Starter
 
 #nowarn "20"
 
-open System.Reflection
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Mvc.ApplicationParts
 open Microsoft.Extensions.DependencyInjection
-open Microsoft.Extensions.FileProviders
 open Microsoft.Extensions.Hosting
 open Registration
 open Accounting
@@ -39,20 +37,6 @@ module Program =
         app.UseRouting()
         app.UseAuthorization()
 
-        let getFileProvider assemblyName =
-            let assembly = Assembly.Load(AssemblyName(assemblyName))
-            EmbeddedFileProvider(assembly, $"{assemblyName}.wwwroot")
-
-        let staticFileOptions =
-            StaticFileOptions(
-                FileProvider =
-                    CompositeFileProvider(
-                        getFileProvider "Registration"
-                        getFileProvider "Accounting"
-                    )
-            )
-
-        app.UseStaticFiles(staticFileOptions)
         app.MapControllers()
 
         app.Run()

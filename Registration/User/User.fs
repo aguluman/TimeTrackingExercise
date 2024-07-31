@@ -1,5 +1,6 @@
 ﻿namespace Registration.User
 
+open Registration.Fundamentals
 open Registration.User.Events
 
 type User =
@@ -25,7 +26,9 @@ type UserState =
 module User =
     let projectState (events: UserEvent list) =
         events
-        |> List.sortBy (fun x -> x.Instant)
+        |> List.sortBy (fun x ->
+            let (Instant instant) = x.Instant
+            instant.ToUnixTimeTicks())
         |> List.fold
             (fun oldState event ->
                 match oldState, event.Data with

@@ -16,8 +16,4 @@
         <ProjectReference Include="..\Registration\Registration.fsproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <_ContentIncludedByDefault Remove="wwwroot\index.html"/>
-    </ItemGroup>
-
 </Project>
