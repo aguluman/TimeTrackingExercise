@@ -4,4 +4,6 @@ type RegistrationError =
     | EmailAlreadyRegistered
     | UserNotInVerificationProcess
     | WrongVerificationCode
+    | WrongCompletionId
+    | UserNotFound
 

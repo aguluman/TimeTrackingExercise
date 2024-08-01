@@ -3,7 +3,6 @@
 open System
 open Microsoft.AspNetCore.Mvc
 open FsToolkit.ErrorHandling
-open Registration.Operations
 open Registration.User.Events
 
 
@@ -23,3 +22,8 @@ type RegistrationApiController(facade: RegistrationFacade) =
     [<Route("verify")>]
     member self.Verify([<FromBody>] data) =
         asyncResult { return! facade.VerifyPhone data }
+
+    [<HttpPost>]
+    [<Route("complete")>]
+    member self.Start([<FromBody>] data) =
+        asyncResult { do! facade.CompleteRegistration data }

@@ -21,3 +21,10 @@ type RegistrationFacade(services: RegistrationServices, storages: RegistrationSt
             (User.getUser storages.UserEvents)
             storages.OpenVerifications.Query
             storages.OpenVerifications.Remove
+
+    member self.CompleteRegistration =
+        CompleteRegistration.execute
+            (User.getUser storages.UserEvents)
+            storages.UserEvents.PersistEvent
+            services.GetPasswordHash
+            getInstant

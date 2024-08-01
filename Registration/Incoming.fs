@@ -1,6 +1,7 @@
 ﻿namespace Registration
 
 open Registration.User
+open Registration.User.Events
 open Registration.Verification
 open Registration.Verification.Model
 
@@ -25,4 +26,5 @@ module RegistrationStorageCreator =
 type RegistrationServices =
     { GetNodaInstant: unit -> NodaTime.Instant
       SendVerificationCode: SendVerificationCode
-      GenerateVerificationCode: GenerateVerificationCode }
+      GenerateVerificationCode: GenerateVerificationCode
+      GetPasswordHash: string -> PasswordHash }
