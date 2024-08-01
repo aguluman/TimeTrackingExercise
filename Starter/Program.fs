@@ -2,6 +2,7 @@ namespace Starter
 
 #nowarn "20"
 
+open System.Text.Json.Serialization
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Mvc.ApplicationParts
 open Microsoft.Extensions.DependencyInjection
@@ -18,7 +19,11 @@ module Program =
 
         let accountingAssemblyPart = typeof<AccountingId>.Assembly |> AssemblyPart
 
-        let parts = builder.Services.AddControllers().PartManager.ApplicationParts
+        let parts =
+            builder.Services
+                .AddControllers()
+                .AddJsonOptions(fun options -> options.JsonSerializerOptions.Converters.Add(JsonFSharpConverter()))
+                .PartManager.ApplicationParts
 
         parts.Add(registrationAssemblyPart)
         parts.Add(accountingAssemblyPart)

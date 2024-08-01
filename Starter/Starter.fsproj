@@ -16,4 +16,8 @@
         <ProjectReference Include="..\Registration\Registration.fsproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="FSharp.SystemTextJson" Version="1.3.13" />
+    </ItemGroup>
+
 </Project>
