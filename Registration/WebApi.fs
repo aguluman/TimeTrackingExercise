@@ -1,12 +1,14 @@
 ﻿namespace Registration
 
 open System
+open Microsoft.AspNetCore.Authorization
 open Microsoft.AspNetCore.Mvc
 open FsToolkit.ErrorHandling
 open Registration.User.Events
 
 
 [<ApiController>]
+[<AllowAnonymous>]
 [<Route("registration")>]
 type RegistrationApiController(facade: RegistrationFacade) =
     inherit ControllerBase()
@@ -27,3 +29,9 @@ type RegistrationApiController(facade: RegistrationFacade) =
     [<Route("complete")>]
     member self.Start([<FromBody>] data) =
         asyncResult { do! facade.CompleteRegistration data }
+
+
+    [<HttpPost>]
+    [<Route("login")>]
+    member self.Start([<FromBody>] data) =
+        asyncResult { return! facade.CreateToken data }

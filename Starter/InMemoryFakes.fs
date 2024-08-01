@@ -2,6 +2,8 @@
 
 open System.Security.Cryptography
 open System.Text
+open Registration.Operations
+open Registration.User
 open Registration.User.Events
 open Registration.Verification.Model
 
@@ -20,3 +22,9 @@ module Fakes =
 
         let result = fromBytes (Encoding.UTF8.GetBytes(input))
         PasswordHash result
+
+    let createAuthToken (user: User) =
+        let email = user.Email |> (fun (Email e) -> e)
+        let result = $"thisIsAFakeToken+{email}+{user.FirstName}+{user.LastName}"
+
+        AuthToken result

@@ -1,5 +1,6 @@
 ﻿namespace Registration
 
+open Registration.Operations
 open Registration.User
 open Registration.User.Events
 open Registration.Verification
@@ -27,4 +28,5 @@ type RegistrationServices =
     { GetNodaInstant: unit -> NodaTime.Instant
       SendVerificationCode: SendVerificationCode
       GenerateVerificationCode: GenerateVerificationCode
-      GetPasswordHash: string -> PasswordHash }
+      GetPasswordHash: string -> PasswordHash
+      CreateAuthToken: User -> AuthToken }

@@ -3,20 +3,28 @@ namespace Starter
 #nowarn "20"
 
 open System.Text.Json.Serialization
+open Microsoft.AspNetCore.Authentication
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Mvc.ApplicationParts
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Hosting
 open Registration
 open Accounting
+open Starter.FakeAuthentication
 
 module Program =
     [<EntryPoint>]
     let main args =
         let builder = WebApplication.CreateBuilder(args)
 
-        let registrationAssemblyPart = typeof<RegistrationFacade>.Assembly |> AssemblyPart
+        builder.Services
+            .AddAuthentication()
+            .AddScheme<AuthenticationSchemeOptions, FakeAuthenticationHandler>(FakeSchemeName, (fun _ -> ()))
+        |> ignore
 
+        builder.Services.AddAuthorization |> ignore
+
+        let registrationAssemblyPart = typeof<RegistrationFacade>.Assembly |> AssemblyPart
         let accountingAssemblyPart = typeof<AccountingId>.Assembly |> AssemblyPart
 
         let parts =
@@ -40,6 +48,7 @@ module Program =
 
         app.UseHttpsRedirection()
         app.UseRouting()
+        app.UseAuthentication()
         app.UseAuthorization()
 
         app.MapControllers()

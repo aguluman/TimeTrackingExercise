@@ -6,4 +6,4 @@ type RegistrationError =
     | WrongVerificationCode
     | WrongCompletionId
     | UserNotFound
-
+    | WrongPassword

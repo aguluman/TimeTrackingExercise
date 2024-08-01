@@ -8,6 +8,7 @@
         <Compile Include="InMemoryFakes.fs"/>
         <Compile Include="Services.fs"/>
         <Compile Include="FacadesCreator.fs"/>
+        <Compile Include="Authentication.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
