@@ -20,10 +20,6 @@ type RegistrationApiController(facade: RegistrationFacade) =
         }
 
     [<HttpGet>]
-    [<Route("test")>]
-    member self.Test() =
-        async {
-            return
-                { StartRegistration.Data.Email = Email ""
-                  StartRegistration.Data.PhoneNumber = PhoneNumber "" }
-        }
+    [<Route("verify")>]
+    member self.Verify([<FromBody>] data) =
+        asyncResult { return! facade.VerifyPhone data }
