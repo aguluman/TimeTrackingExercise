@@ -1,5 +1,6 @@
-﻿namespace Registration.Operations
+﻿namespace Registration.Features
 
+open System
 open FsToolkit.ErrorHandling
 open Registration
 open Registration.Fundamentals
@@ -35,6 +36,7 @@ module StartRegistration =
             do!
                 persistUserEvent
                     { UserEvent.UserId = userId
+                      EventId = Guid.NewGuid()
                       Email = data.Email
                       Data =
                         UserEventData.RegistrationStarted

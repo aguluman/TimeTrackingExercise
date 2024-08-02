@@ -1,4 +1,4 @@
-﻿namespace Registration.Operations
+﻿namespace Registration.Features
 
 open FsToolkit.ErrorHandling
 open Registration

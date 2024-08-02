@@ -1,6 +1,6 @@
 ﻿namespace Registration
 
-open Registration.Operations
+open Registration.Features
 open Registration.User
 open Registration.User.Events
 open Registration.Verification
@@ -10,11 +10,11 @@ type RegistrationStorages =
     { UserEvents: UserEventStorage
       OpenVerifications: OpenVerificationStorage }
 
-type PostgreSqlContext = { ConnectionString: string }
+type SqlContext = { ConnectionString: string }
 
 type RegistrationStorageContext =
     | InMemory
-    | PostgreSql of PostgreSqlContext
+    | Sql of SqlContext
 
 module RegistrationStorageCreator =
     let create (ctx: RegistrationStorageContext) =
@@ -22,7 +22,7 @@ module RegistrationStorageCreator =
         | InMemory ->
             { UserEvents = UserEventInMemoryStorage.create ()
               OpenVerifications = OpenVerificationInMemoryStorage.create () }
-        | _ -> failwith "Not yet implemented" //TODO: Implement PostgreSql storage
+        | _ -> failwith "Not yet implemented" //TODO: Implement any Relational Sql storage
 
 type RegistrationServices =
     { GetNodaInstant: unit -> NodaTime.Instant

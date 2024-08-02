@@ -38,7 +38,9 @@ module Program =
 
         let facades = FacadesCreator.create builder.Configuration
 
-        builder.Services.AddSingleton<RegistrationFacade>(fun _ -> facades.Registration)
+        builder.Services
+            .AddSingleton<RegistrationFacade>(fun _ -> facades.Registration)
+            .AddSingleton<AccountingFacade>(fun _ -> facades.Accounting)
         |> ignore
 
         let app = builder.Build()

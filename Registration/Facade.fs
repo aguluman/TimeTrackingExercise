@@ -1,7 +1,7 @@
 ﻿namespace Registration
 
 open Registration.Fundamentals
-open Registration.Operations
+open Registration.Features
 open Registration.User
 
 type RegistrationFacade(services: RegistrationServices, storages: RegistrationStorages) =

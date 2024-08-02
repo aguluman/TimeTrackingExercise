@@ -2,7 +2,7 @@
 
 open System.Security.Cryptography
 open System.Text
-open Registration.Operations
+open Registration.Features
 open Registration.User
 open Registration.User.Events
 open Registration.Verification.Model
@@ -14,10 +14,11 @@ module Fakes =
         async { printfn $"Verification Code for {phone}: {code}" }
 
     let hashPassword (input: string) =
-        let fromBytes(data: byte array) =
+        let fromBytes (data: byte array) =
             use md5 = MD5.Create()
+
             (StringBuilder(), md5.ComputeHash(data))
-            ||> Array.fold(fun sb b -> sb.Append(b.ToString("x2")))
+            ||> Array.fold (fun sb b -> sb.Append(b.ToString("x2")))
             |> string
 
         let result = fromBytes (Encoding.UTF8.GetBytes(input))
@@ -25,6 +26,7 @@ module Fakes =
 
     let createAuthToken (user: User) =
         let email = user.Email |> (fun (Email e) -> e)
-        let result = $"thisIsAFakeToken+{email}+{user.FirstName}+{user.LastName}"
+        let userId = user.UserId |> (fun (UserId u) -> u.ToString())
+        let result = $"thisIsAFakeToken+{email}+{userId}"
 
         AuthToken result

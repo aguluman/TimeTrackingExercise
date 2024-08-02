@@ -1,5 +1,6 @@
-﻿namespace Registration.Operations
+﻿namespace Registration.Features
 
+open System
 open Registration
 open Registration.Fundamentals
 open Registration.User
@@ -39,6 +40,7 @@ module CompleteRegistration =
             do!
                 persistUserEvent
                     { UserEvent.UserId = user.UserId
+                      EventId = Guid.NewGuid()
                       Email = user.Email
                       Data =
                         UserEventData.RegistrationCompleted

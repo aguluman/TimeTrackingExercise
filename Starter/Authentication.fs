@@ -36,7 +36,12 @@ module FakeAuthentication =
                                 let parts = encodedToken.Split('+')
 
                                 let identity =
-                                    ClaimsIdentity([ Claim("Email", Array.get parts 1) ], this.Scheme.Name)
+                                    ClaimsIdentity(
+                                        [
+                                            Claim("Email", Array.get parts 1)
+                                            Claim("userid", Array.get parts 2)
+                                        ],
+                                        this.Scheme.Name)
 
                                 let principal = System.Security.Principal.GenericPrincipal(identity, null)
                                 let ticket = AuthenticationTicket(principal, this.Scheme.Name)

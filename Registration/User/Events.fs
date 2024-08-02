@@ -26,6 +26,7 @@ module Events =
 
     type UserEvent =
         { UserId: UserId
+          EventId: Guid
           Email: Email
           Data: UserEventData
           Instant: Instant }
