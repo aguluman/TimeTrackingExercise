@@ -1,6 +1,7 @@
 ﻿namespace Accounting
 
 open System
+open Accounting.Wallet
 open Microsoft.AspNetCore.Mvc
 open Microsoft.AspNetCore.Authorization
 

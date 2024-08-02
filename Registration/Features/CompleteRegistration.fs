@@ -19,6 +19,7 @@ module CompleteRegistration =
     let execute
         (queryUser: Email -> Async<UserState>)
         (persistUserEvent: UserEvent -> Async<unit>)
+        (createWallet: UserId -> Async<Result<unit, obj>>)
         (hash: string -> PasswordHash)
         (getInstant: unit -> Instant)
         (data: Data)
@@ -48,4 +49,8 @@ module CompleteRegistration =
                               LastName = data.LastName
                               PasswordHash = passwordHash }
                       Instant = getInstant () }
+
+            do!
+                createWallet user.UserId
+                |> Async.map (Result.mapError (fun _ -> RegistrationError.ExternalError))
         }

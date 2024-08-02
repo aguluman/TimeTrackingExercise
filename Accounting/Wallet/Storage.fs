@@ -1,4 +1,4 @@
-﻿namespace Accounting
+﻿namespace Accounting.Wallet
 
 type WalletEventStorage =
     abstract PersistEvent: WalletEvent -> Async<unit>

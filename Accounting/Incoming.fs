@@ -1,5 +1,7 @@
 ﻿namespace Accounting
 
+open Accounting.Wallet
+
 type AccountingStorages = { WalletEvents: WalletEventStorage }
 
 type SqlContext = { ConnectionString: string }

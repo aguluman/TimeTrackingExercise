@@ -1,6 +1,7 @@
 ﻿namespace Accounting.Features
 
 open Accounting
+open Accounting.Wallet
 open FsToolkit.ErrorHandling
 
 [<RequireQualifiedAccess>]

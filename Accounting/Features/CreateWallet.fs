@@ -2,6 +2,7 @@
 
 open System
 open Accounting
+open Accounting.Wallet
 open FsToolkit.ErrorHandling
 
 [<RequireQualifiedAccess>]
