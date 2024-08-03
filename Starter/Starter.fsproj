@@ -8,17 +8,18 @@
         <Compile Include="InMemoryFakes.fs"/>
         <Compile Include="Services.fs"/>
         <Compile Include="FacadesCreator.fs"/>
-        <Compile Include="Authentication.fs" />
+        <Compile Include="Authentication.fs"/>
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\Accounting\Accounting.fsproj"/>
         <ProjectReference Include="..\Registration\Registration.fsproj"/>
+        <ProjectReference Include="..\Rental\Rental.fsproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="FSharp.SystemTextJson" Version="1.3.13" />
+        <PackageReference Include="FSharp.SystemTextJson" Version="1.3.13"/>
     </ItemGroup>
 
 </Project>

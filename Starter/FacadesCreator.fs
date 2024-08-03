@@ -5,12 +5,14 @@ open Accounting
 open Accounting.Features
 open Accounting.Wallet
 open Accounting.AccountingStorageCreator
-open Microsoft.Extensions.Configuration
 open Registration
+open Rental
+open Microsoft.Extensions.Configuration
 
 type Facades =
     { Registration: RegistrationFacade
-      Accounting: AccountingFacade }
+      Accounting: AccountingFacade
+      Rental: RentalFacade }
 
 module Adapters =
     let createWallet (facade: AccountingFacade) (Registration.User.Events.UserId userId) =
@@ -39,5 +41,11 @@ module FacadesCreator =
                 (RegistrationStorageCreator.create RegistrationStorageContext.InMemory)
             )
 
+        let rentalService = { RentalServices.GetNodaInstant = Services.getNodaInstant }
+
+        let rentalFacade =
+            RentalFacade(rentalService, (RentalStorageCreator.create RentalStorageContext.InMemory))
+
         { Registration = registrationFacade
-          Accounting = accountingFacade }
+          Accounting = accountingFacade
+          Rental = rentalFacade }

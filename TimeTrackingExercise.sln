@@ -6,6 +6,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Registration", "Registratio
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Accounting", "Accounting\Accounting.fsproj", "{4D13647D-44D9-4994-86D4-135634F915B5}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Rental", "Rental\Rental.fsproj", "{96799207-C8D6-478E-9C7E-C260EF270146}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{4D13647D-44D9-4994-86D4-135634F915B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D13647D-44D9-4994-86D4-135634F915B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D13647D-44D9-4994-86D4-135634F915B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96799207-C8D6-478E-9C7E-C260EF270146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96799207-C8D6-478E-9C7E-C260EF270146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96799207-C8D6-478E-9C7E-C260EF270146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96799207-C8D6-478E-9C7E-C260EF270146}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

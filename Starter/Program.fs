@@ -10,6 +10,7 @@ open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Hosting
 open Registration
 open Accounting
+open Rental
 open Starter.FakeAuthentication
 
 module Program =
@@ -41,6 +42,7 @@ module Program =
         builder.Services
             .AddSingleton<RegistrationFacade>(fun _ -> facades.Registration)
             .AddSingleton<AccountingFacade>(fun _ -> facades.Accounting)
+            .AddSingleton<RentalFacade>(fun _ -> facades.Rental)
         |> ignore
 
         let app = builder.Build()
