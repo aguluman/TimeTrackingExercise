@@ -54,6 +54,7 @@ module Program =
         app.UseRouting()
         app.UseAuthentication()
         app.UseAuthorization()
+        app.UseWebSockets()
 
         app.MapControllers()
 

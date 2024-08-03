@@ -20,11 +20,13 @@ module Adapters =
 
 module FacadesCreator =
     let create (_configuration: IConfiguration) =
+        let uiChangedEvent = Event<string>()
+
         let accountingServices =
             { AccountingServices.GetNodaInstant = Services.getNodaInstant }
 
         let accountingFacade =
-            AccountingFacade(accountingServices, (create AccountingStorageContext.InMemory))
+            AccountingFacade(accountingServices, (create AccountingStorageContext.InMemory), uiChangedEvent)
 
         let registrationServices =
             { RegistrationServices.GenerateVerificationCode = Fakes.generateVerificationCode
