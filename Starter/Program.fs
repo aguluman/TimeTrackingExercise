@@ -2,6 +2,7 @@ namespace Starter
 
 #nowarn "20"
 
+open System
 open System.Text.Json.Serialization
 open Microsoft.AspNetCore.Authentication
 open Microsoft.AspNetCore.Builder
@@ -37,13 +38,17 @@ module Program =
         parts.Add(registrationAssemblyPart)
         parts.Add(accountingAssemblyPart)
 
-        let facades = FacadesCreator.create builder.Configuration
+        let uiChangedEvent, facades = FacadesCreator.create builder.Configuration
 
         builder.Services
             .AddSingleton<RegistrationFacade>(fun _ -> facades.Registration)
             .AddSingleton<AccountingFacade>(fun _ -> facades.Accounting)
             .AddSingleton<RentalFacade>(fun _ -> facades.Rental)
+            .AddSingleton<Event<Guid * string>>(fun _ -> uiChangedEvent)
         |> ignore
+
+        let eventStream =
+            builder.Services.BuildServiceProvider().GetService<Event<Guid * string>>()
 
         let app = builder.Build()
 
@@ -55,8 +60,8 @@ module Program =
         app.UseAuthentication()
         app.UseAuthorization()
         app.UseWebSockets()
-
         app.MapControllers()
+        app.Use(WebSocket.wsMiddleware eventStream.Publish)
 
         app.Run()
 

@@ -4,7 +4,9 @@ open System
 open System.Net.WebSockets
 open System.Text
 open System.Threading
-open Accounting.FSharp.Control.Tasks
+open System.Threading.Tasks
+open Microsoft.AspNetCore.Http
+open Starter.FSharp.Control.Tasks
 
 module WebSocket =
     let sendWebSocketMessageOnEvent (webSocket: WebSocket) (eventStream: IEvent<Guid * string>) filterGuid =
@@ -37,3 +39,19 @@ module WebSocket =
 
             do! waitForEvent ()
         }
+
+    let wsMiddleware (eventStream: IEvent<Guid * string>) (context: HttpContext) (next: Func<Task>) =
+        task {
+            if
+                context.WebSockets.IsWebSocketRequest
+                && context.Request.Path.Value.StartsWith("/ws/user")
+            then
+                let userId =
+                    Guid.Parse(context.Request.Path.Value.Replace("ws/user/", String.Empty))
+
+                use! webSocket = context.WebSockets.AcceptWebSocketAsync()
+                do! userId |> sendWebSocketMessageOnEvent webSocket eventStream
+            else
+                do! next.Invoke()
+        }
+        :> Task
