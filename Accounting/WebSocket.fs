@@ -7,26 +7,32 @@ open System.Threading
 open Accounting.FSharp.Control.Tasks
 
 module WebSocket =
-    let sendWebSocketMessageOnEvent (webSocket: WebSocket) eventStream =
+    let sendWebSocketMessageOnEvent (webSocket: WebSocket) (eventStream: IEvent<Guid * string>) filterGuid =
         task {
             let rec waitForEvent () =
                 task {
-                    printfn "Waiting"
-                    let! _ = Async.AwaitEvent eventStream
-                    printfn "Changed happened"
-                    let serverMsg = Encoding.UTF8.GetBytes "change"
+                    printfn "waiting"
+                    let! id, msg = Async.AwaitEvent eventStream
+                    printfn "changed happened"
 
-                    do!
-                        webSocket.SendAsync(
-                            ArraySegment<byte>(serverMsg, 0, serverMsg.Length),
-                            WebSocketMessageType.Text,
-                            true,
-                            CancellationToken.None
-                        )
+                    if id = filterGuid then
+                        printfn "correct id"
+                        let serverMsg = Encoding.UTF8.GetBytes msg
 
-                    printfn "Message Sent"
+                        do!
+                            webSocket.SendAsync(
+                                ArraySegment<byte>(serverMsg, 0, serverMsg.Length),
+                                WebSocketMessageType.Text,
+                                true,
+                                CancellationToken.None
+                            )
 
-                    do! waitForEvent ()
+                        printfn "Message Sent"
+
+                        do! waitForEvent ()
+                    else
+                        printfn "wrong id"
+                        do! waitForEvent ()
                 }
 
             do! waitForEvent ()
