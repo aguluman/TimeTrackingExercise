@@ -8,6 +8,7 @@ open Accounting.AccountingStorageCreator
 open Registration
 open Rental
 open Microsoft.Extensions.Configuration
+open Rental.Bike
 
 type Facades =
     { Registration: RegistrationFacade
@@ -45,10 +46,15 @@ module FacadesCreator =
                 (RegistrationStorageCreator.create RegistrationStorageContext.InMemory)
             )
 
-        let rentalService = { RentalServices.GetNodaInstant = Services.getNodaInstant }
+        let rentalServices = { RentalServices.GetNodaInstant = Services.getNodaInstant }
+
+        let rentalJsonContext = { BikeJsonStorage.JsonContext.FilePath = "./bikes.json" }
 
         let rentalFacade =
-            RentalFacade(rentalService, (RentalStorageCreator.create RentalStorageContext.InMemory))
+            RentalFacade(
+                rentalServices,
+                (RentalStorageCreator.create (RentalStorageContext.Json rentalJsonContext))
+            )
 
         uiChangedEvent,
         { Registration = registrationFacade

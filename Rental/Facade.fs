@@ -1,6 +1,5 @@
 ﻿namespace Rental
 
-type RentalFacade(services: RentalServices, storages: RentalStorages) =
-    let getInstant = services.GetNodaInstant >> Instant
-
-    member self.test () = ()
+open Rental.Bike
+type RentalFacade(_services: RentalServices, storages: RentalStorages) =
+    member self.GetAllBikes = storages.Bikes.GetAll

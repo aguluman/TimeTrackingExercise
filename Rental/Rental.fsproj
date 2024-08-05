@@ -6,16 +6,31 @@
     </PropertyGroup>
 
     <ItemGroup>
-    <Compile Include="Fundamentals.fs" />
-    <Compile Include="Incoming.fs" />
-    <Compile Include="Facade.fs" />
-    <Compile Include="WebApi.fs" />
+        <Content Include="bikes.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="sample.json"/>
+        <Compile Include="Fundamentals.fs"/>
+        <Compile Include="Bike\Bike.fs"/>
+        <Compile Include="Bike\Storage.fs" />
+        <Compile Include="Incoming.fs"/>
+        <Compile Include="Facade.fs"/>
+        <Compile Include="WebApi.fs"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="FsToolkit.ErrorHandling" Version="4.16.0" />
-      <PackageReference Include="FsToolkit.ErrorHandling.TaskResult" Version="4.16.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-      <PackageReference Include="NodaTime" Version="3.1.11" />
+        <PackageReference Include="FSharp.Data" Version="6.4.0"/>
+        <PackageReference Include="FSharp.Data.Json" Version="1.0.0"/>
+        <PackageReference Include="FSharp.Data.JsonProvider" Version="0.5.0"/>
+        <PackageReference Include="FSharpx.Extras" Version="3.2.1"/>
+        <PackageReference Include="FsToolkit.ErrorHandling" Version="4.16.0"/>
+        <PackageReference Include="FsToolkit.ErrorHandling.TaskResult" Version="4.16.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5"/>
+        <PackageReference Include="NodaTime" Version="3.1.11"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="bikes.json"/>
+        <Content Include="sample.json"/>
     </ItemGroup>
 </Project>
