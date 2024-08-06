@@ -53,7 +53,7 @@ module FacadesCreator =
         let rentalFacade =
             RentalFacade(
                 rentalServices,
-                (RentalStorageCreator.create (RentalStorageContext.Json rentalJsonContext))
+                (RentalStorageCreator.create (RentalStorageContext.Mixed rentalJsonContext))
             )
 
         uiChangedEvent,
