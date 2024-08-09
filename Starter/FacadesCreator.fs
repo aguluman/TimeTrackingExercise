@@ -1,14 +1,15 @@
 ﻿namespace Starter
 
-open System
 open Accounting
 open Accounting.Features
 open Accounting.Wallet
 open Accounting.AccountingStorageCreator
 open Registration
 open Rental
-open Microsoft.Extensions.Configuration
 open Rental.Bike
+open System
+open FSharpx
+open Microsoft.Extensions.Configuration
 
 type Facades =
     { Registration: RegistrationFacade
@@ -18,6 +19,18 @@ type Facades =
 module Adapters =
     let createWallet (facade: AccountingFacade) (Registration.User.Events.UserId userId) =
         facade.CreateWallet (Guid.NewGuid() |> WalletId) { CreateWallet.Data.UserId = UserId userId }
+
+    let getUserBalance (facade: AccountingFacade) (Rental.Booking.UserId userId) =
+        async {
+            let accountingUserId = UserId userId
+            let! walletResult = facade.GetWallet accountingUserId
+            let walletOption = walletResult |> Option.ofResult
+
+            return
+                walletOption
+                |> Option.map
+                    (fun { Balance = (Accounting.Wallet.Balance balance) } -> Balance balance)
+        }
 
 module FacadesCreator =
     let create (_configuration: IConfiguration) =
@@ -29,7 +42,10 @@ module FacadesCreator =
         let accountingChanged msg (UserId userId) = uiChangedEvent.Trigger(userId, msg)
 
         let accountingFacade =
-            AccountingFacade(accountingServices, (create AccountingStorageContext.InMemory), accountingChanged)
+            AccountingFacade(
+                accountingServices,
+                (create AccountingStorageContext.InMemory),
+                accountingChanged )
 
         let registrationServices =
             { RegistrationServices.GenerateVerificationCode = Fakes.generateVerificationCode
@@ -46,7 +62,10 @@ module FacadesCreator =
                 (RegistrationStorageCreator.create RegistrationStorageContext.InMemory)
             )
 
-        let rentalServices = { RentalServices.GetNodaInstant = Services.getNodaInstant }
+        let rentalServices = {
+            RentalServices.GetNodaInstant = Services.getNodaInstant
+            GetUserBalance = Adapters.getUserBalance accountingFacade
+        }
 
         let rentalJsonContext = { BikeJsonStorage.JsonContext.FilePath = "./bikes.json" }
 

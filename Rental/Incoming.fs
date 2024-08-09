@@ -23,4 +23,5 @@ module RentalStorageCreator =
         | _ -> failwith "not implemented" //TODO: Implement any Relational Sql storage
 
 type RentalServices =
-    { GetNodaInstant: unit -> NodaTime.Instant }
+    { GetNodaInstant: unit -> NodaTime.Instant
+      GetUserBalance: UserId -> Async<Balance option> }

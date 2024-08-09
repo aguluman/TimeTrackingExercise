@@ -13,7 +13,10 @@ type RentalFacade(services: RentalServices, storages: RentalStorages) =
     member self.RentBike =
         RentBike.execute
             storages.BookingEvents.PersistEvent
-            storages.BookingEvents.GetEventsOfBike getInstant
+            storages.BookingEvents.GetEventsOfBike
+            storages.Bikes.GetBike
+            services.GetUserBalance
+            getInstant
 
     member self.ReleaseBike =
         ReleaseBike.execute

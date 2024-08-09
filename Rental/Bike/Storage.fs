@@ -1,9 +1,11 @@
 ﻿namespace Rental.Bike
 
 open FSharp.Data
+open Rental
 
 type BikeStorage =
     abstract GetAll: unit -> Async<Bike list>
+    abstract GetBike: BikeId -> Async<Bike option>
 
 module BikeJsonStorage =
     let samplePath = "https://api.github.com/repos/fsharp/FSharp.Data/issues"
@@ -26,4 +28,10 @@ module BikeJsonStorage =
                               Price = Price(decimal bike.Price)
                               Base64Image = bike.Image })
                         |> Array.toList
+                }
+
+            member self.GetBike bikeId =
+                async {
+                    let! bikes = self.GetAll()
+                    return bikes |> List.tryFind (fun b -> b.BikeId = bikeId)
                 } }
