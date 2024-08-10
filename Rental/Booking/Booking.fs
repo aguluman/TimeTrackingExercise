@@ -50,8 +50,7 @@ module Booking =
             bookingsOfBike
             |> List.filter (fun { Start = (Instant start) } -> start.ToUnixTimeTicks() <= ticks)
 
-        let isAvailable =
-            bookingsUntilNow |> List.filter (_.End.IsSome) |> List.isEmpty |> not
+        let isAvailable = bookingsUntilNow |> List.filter (_.End.IsSome) |> List.isEmpty
 
         match isAvailable with
         | true -> Bookable
