@@ -8,7 +8,6 @@ open Registration
 open Rental
 open Rental.Bike
 open System
-open FSharpx
 open Microsoft.Extensions.Configuration
 
 type Facades =
@@ -18,18 +17,28 @@ type Facades =
 
 module Adapters =
     let createWallet (facade: AccountingFacade) (Registration.User.Events.UserId userId) =
-        facade.CreateWallet (Guid.NewGuid() |> WalletId) { CreateWallet.Data.UserId = UserId userId }
+        facade.CreateWallet
+            (Guid.NewGuid() |> WalletId)
+            { CreateWallet.Data.UserId = UserId userId }
 
-    let getUserBalance (facade: AccountingFacade) (Rental.Booking.UserId userId) =
+    let withdrawFromUserBalance
+        (facade: AccountingFacade)
+        (Amount amount)
+        (Rental.Booking.UserId userId)
+        =
         async {
             let accountingUserId = UserId userId
-            let! walletResult = facade.GetWallet accountingUserId
-            let walletOption = walletResult |> Option.ofResult
+            let accountingAmount = Accounting.Wallet.Amount amount
+
+            let! result =
+                facade.Withdraw
+                    { Withdraw.Data.UserId =  accountingUserId
+                      Amount = accountingAmount }
 
             return
-                walletOption
-                |> Option.map
-                    (fun { Balance = (Accounting.Wallet.Balance balance) } -> Balance balance)
+                match result with
+                | Ok _ -> true
+                | _ -> false
         }
 
 module FacadesCreator =
@@ -64,7 +73,7 @@ module FacadesCreator =
 
         let rentalServices = {
             RentalServices.GetNodaInstant = Services.getNodaInstant
-            GetUserBalance = Adapters.getUserBalance accountingFacade
+            WithdrawAmount =  Adapters.withdrawFromUserBalance accountingFacade
         }
 
         let rentalJsonContext = { BikeJsonStorage.JsonContext.FilePath = "./bikes.json" }

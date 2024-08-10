@@ -24,4 +24,4 @@ module RentalStorageCreator =
 
 type RentalServices =
     { GetNodaInstant: unit -> NodaTime.Instant
-      GetUserBalance: UserId -> Async<Balance option> }
+      WithdrawAmount: Amount -> UserId -> Async<bool> }
