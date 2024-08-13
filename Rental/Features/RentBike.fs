@@ -15,6 +15,7 @@ module RentBike =
         (queryBookingEventsOfBike: BikeId -> Async<BookingEvent list>)
         (queryBike: BikeId -> Async<Bike option>)
         (withdrawAmount: Amount -> UserId ->  Async<bool>)
+        (triggerUiChanged: unit -> unit)
         (getInstant: unit -> Instant)
         bookingId
         (data: Data)
@@ -47,4 +48,6 @@ module RentBike =
                       BikeId = data.BikeId
                       Data = Booked data.UserId
                       Instant = instant }
+
+            do triggerUiChanged ()
         }

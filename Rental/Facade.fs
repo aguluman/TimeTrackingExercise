@@ -2,13 +2,15 @@
 
 open Rental.Features
 
-type RentalFacade(services: RentalServices, storages: RentalStorages) =
+type RentalFacade(services: RentalServices, storages: RentalStorages, bikesUiChanged: string -> unit) =
     let getInstant = services.GetNodaInstant >> Instant
+    let bikesUiChangedFromRental () = bikesUiChanged "rental"
 
     member self.GetAllBookableBikes =
         QueryBikes.query
             storages.Bikes.GetAll
-            storages.BookingEvents.GetAllEvents getInstant
+            storages.BookingEvents.GetAllEvents
+            getInstant
 
     member self.RentBike =
         RentBike.execute
@@ -16,9 +18,11 @@ type RentalFacade(services: RentalServices, storages: RentalStorages) =
             storages.BookingEvents.GetEventsOfBike
             storages.Bikes.GetBike
             services.WithdrawAmount
+            bikesUiChangedFromRental
             getInstant
 
     member self.ReleaseBike =
         ReleaseBike.execute
             storages.BookingEvents.PersistEvent
-            storages.BookingEvents.GetEventsOfBooking getInstant
+            storages.BookingEvents.GetEventsOfBooking
+            getInstant

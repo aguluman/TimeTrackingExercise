@@ -2,7 +2,6 @@ namespace Starter
 
 #nowarn "20"
 
-open System
 open System.Text.Json.Serialization
 open Microsoft.AspNetCore.Authentication
 open Microsoft.AspNetCore.Builder
@@ -41,14 +40,14 @@ module Program =
         let uiChangedEvent, facades = FacadesCreator.create builder.Configuration
 
         builder.Services
+            .AddSingleton<Event<string * string>>(fun _ -> uiChangedEvent)
             .AddSingleton<RegistrationFacade>(fun _ -> facades.Registration)
             .AddSingleton<AccountingFacade>(fun _ -> facades.Accounting)
             .AddSingleton<RentalFacade>(fun _ -> facades.Rental)
-            .AddSingleton<Event<Guid * string>>(fun _ -> uiChangedEvent)
         |> ignore
 
         let eventStream =
-            builder.Services.BuildServiceProvider().GetService<Event<Guid * string>>()
+            builder.Services.BuildServiceProvider().GetService<Event<string * string>>()
 
         let app = builder.Build()
 
