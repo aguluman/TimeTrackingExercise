@@ -19,6 +19,7 @@ module QueryBikes =
         (queryAllBikes: unit -> Async<Bike list>)
         (queryAllBookingEvents: unit -> Async<BookingEvent list>)
         (getInstant: unit -> Instant)
+        userId
         =
         async {
             let! bikes = queryAllBikes ()
@@ -35,6 +36,8 @@ module QueryBikes =
                       Name = b.Name
                       Manufacturer = b.Manufacturer
                       Price = b.Price
-                      Status = b.BikeId |> getBookingsOfBike |> (Booking.getStatusOfBike (getInstant ()))
+                      Status = b.BikeId 
+                        |> getBookingsOfBike
+                        |> (Booking.getStatusOfBike (getInstant ()) userId)
                       Base64Image = b.Base64Image })
         }
