@@ -5,8 +5,10 @@ open Accounting.Features
 open Accounting.Wallet
 
 
-type AccountingFacade(services: AccountingServices, storages: AccountingStorages, uiChanged: string -> UserId -> unit) =
+type AccountingFacade(services: AccountingServices, storages: AccountingStorages, uiChanged: obj -> WalletId -> unit) =
     let getInstant = services.GetNodaInstant >> Instant
+
+    let uiWalletChanged = uiChanged {| Sender = "accounting" |}
 
     member self.CreateWallet =
         CreateWallet.execute
@@ -15,16 +17,22 @@ type AccountingFacade(services: AccountingServices, storages: AccountingStorages
 
     member self.Deposit =
         Deposit.execute
-            storages.WalletEvents.QueryByUserId
+            storages.WalletEvents.GetWalletEventsByUserId
             storages.WalletEvents.PersistEvent
-            getInstant (uiChanged "accounting")
+            getInstant 
+            uiWalletChanged
 
     member self.Withdraw =
         Withdraw.execute
-            storages.WalletEvents.QueryByUserId
+            storages.WalletEvents.GetWalletEventsByUserId
             storages.WalletEvents.PersistEvent
-            getInstant (uiChanged "accounting")
+            getInstant 
+            uiWalletChanged
+
+    member self.GetWalletOfUser = 
+        QueryWallet.queryByUser 
+            storages.WalletEvents.GetWalletEventsByUserId
 
     member self.GetWallet =
-        QueryWallet.query
-            storages.WalletEvents.QueryByUserId
+        QueryWallet.queryByWalletId 
+            storages.WalletEvents.GetWalletEvents

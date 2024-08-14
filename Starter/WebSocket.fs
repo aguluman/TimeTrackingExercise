@@ -5,21 +5,30 @@ open System.Net.WebSockets
 open System.Text
 open System.Threading
 open System.Threading.Tasks
+open System.Text.Json
+open System.Text.Json.Serialization
 open Microsoft.AspNetCore.Http
 open Starter.FSharp.Control.Tasks
 
 module WebSocket =
-    let sendWebSocketMessageOnEvent (webSocket: WebSocket) (eventStream: IEvent<string * string>) filterGuid =
+
+    let serialize (input: 'a) =
+        let options = JsonSerializerOptions()
+        options.Converters.Add(JsonFSharpConverter())
+        JsonSerializer.Serialize(input, options)
+
+    let sendWebSocketMessageOnEvent (webSocket: WebSocket) (eventStream: IEvent<string * obj>) filterGuid =
         task {
             let rec waitForEvent () =
                 task {
                     printfn "waiting"
-                    let! id, msg = Async.AwaitEvent eventStream
+                    let! id, obj = Async.AwaitEvent eventStream
                     printfn "changed happened"
 
                     if id = filterGuid then
                         printfn "correct id"
-                        let serverMsg = Encoding.UTF8.GetBytes msg
+                        let json = serialize obj
+                        let serverMsg = Encoding.UTF8.GetBytes json
 
                         do!
                             webSocket.SendAsync(
@@ -40,7 +49,7 @@ module WebSocket =
             do! waitForEvent ()
         }
 
-    let wsMiddleware (eventStream: IEvent<string * string>) (context: HttpContext) (next: Func<Task>) =
+    let wsMiddleware (eventStream: IEvent<string * obj>) (context: HttpContext) (next: Func<Task>) =
         task {
             if
                 context.WebSockets.IsWebSocketRequest
@@ -49,7 +58,9 @@ module WebSocket =
                 let id = context.Request.Path.Value.Replace("/ws/id", String.Empty)
 
                 use! webSocket = context.WebSockets.AcceptWebSocketAsync()
-                do! id |> sendWebSocketMessageOnEvent webSocket eventStream
+                do! 
+                    id
+                    |> sendWebSocketMessageOnEvent webSocket eventStream
             else
                 do! next.Invoke()
         }

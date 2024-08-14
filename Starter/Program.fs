@@ -40,14 +40,14 @@ module Program =
         let uiChangedEvent, facades = FacadesCreator.create builder.Configuration
 
         builder.Services
-            .AddSingleton<Event<string * string>>(fun _ -> uiChangedEvent)
+            .AddSingleton<Event<string * obj>>(fun _ -> uiChangedEvent)
             .AddSingleton<RegistrationFacade>(fun _ -> facades.Registration)
             .AddSingleton<AccountingFacade>(fun _ -> facades.Accounting)
             .AddSingleton<RentalFacade>(fun _ -> facades.Rental)
         |> ignore
 
         let eventStream =
-            builder.Services.BuildServiceProvider().GetService<Event<string * string>>()
+            builder.Services.BuildServiceProvider().GetService<Event<string * obj>>()
 
         let app = builder.Build()
 
@@ -60,7 +60,7 @@ module Program =
         app.UseAuthorization()
         app.UseWebSockets()
         app.MapControllers()
-        app.Use(WebSocket.wsMiddleware eventStream.Publish)
+        app.Use(WebSocket.wsMiddleware (eventStream.Publish))
 
         app.Run()
 
