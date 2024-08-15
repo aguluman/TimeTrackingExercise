@@ -1,8 +1,8 @@
 ﻿namespace Rental.Booking
 
 open System
-open Rental
 open Rental.Bike
+open Shared.Types
 
 type BookingId = BookingId of Guid
 type UserId = UserId of Guid

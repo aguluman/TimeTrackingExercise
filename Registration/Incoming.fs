@@ -5,6 +5,7 @@ open Registration.User
 open Registration.User.Events
 open Registration.Verification
 open Registration.Verification.Model
+open Shared.Types
 
 type RegistrationStorages =
     { UserEvents: UserEventStorage
@@ -25,7 +26,7 @@ module RegistrationStorageCreator =
         | _ -> failwith "Not yet implemented" //TODO: Implement any Relational Sql storage
 
 type RegistrationServices =
-    { GetNodaInstant: unit -> NodaTime.Instant
+    { GetInstant: unit -> Instant
       SendVerificationCode: SendVerificationCode
       GenerateVerificationCode: GenerateVerificationCode
       GetPasswordHash: string -> PasswordHash

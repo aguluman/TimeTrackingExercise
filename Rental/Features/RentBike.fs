@@ -4,6 +4,7 @@ open System
 open Rental
 open Rental.Bike
 open Rental.Booking
+open Shared.Types
 open FsToolkit.ErrorHandling
 
 [<RequireQualifiedAccess>]

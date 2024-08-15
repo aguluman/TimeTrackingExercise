@@ -1,6 +1,6 @@
 ﻿namespace Accounting.Wallet
 
-open Accounting
+open Shared.Types
 
 type Balance = Balance of decimal
 

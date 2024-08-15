@@ -6,7 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Fundamentals.fs"/>
         <Compile Include="Models.fs"/>
         <Compile Include="Wallet\Events.fs"/>
         <Compile Include="Wallet\Storage.fs" />
@@ -22,11 +21,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="FSharpx.Extras" Version="3.2.1"/>
-        <PackageReference Include="FsToolkit.ErrorHandling" Version="4.16.0"/>
-        <PackageReference Include="FsToolkit.ErrorHandling.TaskResult" Version="4.16.0"/>
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5"/>
-        <PackageReference Include="NodaTime" Version="3.1.11"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Shared\Shared.fsproj" />
     </ItemGroup>
 
 </Project>

@@ -3,10 +3,10 @@
 open System
 open FsToolkit.ErrorHandling
 open Registration
-open Registration.Fundamentals
 open Registration.User
 open Registration.User.Events
 open Registration.Verification.Model
+open Shared.Types
 
 [<RequireQualifiedAccess>]
 module StartRegistration =

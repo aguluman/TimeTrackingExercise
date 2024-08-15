@@ -6,27 +6,25 @@ open Accounting.Wallet
 
 
 type AccountingFacade(services: AccountingServices, storages: AccountingStorages, uiChanged: obj -> WalletId -> unit) =
-    let getInstant = services.GetNodaInstant >> Instant
-
     let uiWalletChanged = uiChanged {| Sender = "accounting" |}
 
     member self.CreateWallet =
         CreateWallet.execute
             storages.WalletEvents.PersistEvent
-            getInstant
+            services.GetInstant
 
     member self.Deposit =
         Deposit.execute
             storages.WalletEvents.GetWalletEventsByUserId
             storages.WalletEvents.PersistEvent
-            getInstant 
+            services.GetInstant
             uiWalletChanged
 
     member self.Withdraw =
         Withdraw.execute
             storages.WalletEvents.GetWalletEventsByUserId
             storages.WalletEvents.PersistEvent
-            getInstant 
+            services.GetInstant
             uiWalletChanged
 
     member self.GetWalletOfUser = 

@@ -3,6 +3,7 @@
 open Rental
 open Rental.Bike
 open Rental.Booking
+open Shared.Types
 
 [<RequireQualifiedAccess>]
 module QueryBikes =

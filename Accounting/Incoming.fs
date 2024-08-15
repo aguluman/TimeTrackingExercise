@@ -1,7 +1,7 @@
 ﻿namespace Accounting
 
 open Accounting.Wallet
-
+open Shared.Types
 type AccountingStorages = { WalletEvents: WalletEventStorage }
 
 type SqlContext = { ConnectionString: string }
@@ -17,5 +17,5 @@ module AccountingStorageCreator =
         | _ -> failwith "not implemented yet" //TODO: Implement any Relational Sql storage
 
     type AccountingServices = {
-        GetNodaInstant: unit -> NodaTime.Instant
+        GetInstant: unit -> Instant
     }

@@ -2,10 +2,10 @@
 
 open System
 open Registration
-open Registration.Fundamentals
 open Registration.User
 open Registration.User.Events
 open FsToolkit.ErrorHandling
+open Shared.Types
 
 [<RequireQualifiedAccess>]
 module CompleteRegistration =

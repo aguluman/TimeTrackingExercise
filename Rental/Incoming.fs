@@ -2,6 +2,7 @@
 
 open Rental.Bike
 open Rental.Booking
+open Shared.Types
 
 type RentalStorages =
     { Bikes: BikeStorage
@@ -23,5 +24,5 @@ module RentalStorageCreator =
         | _ -> failwith "not implemented" //TODO: Implement any Relational Sql storage
 
 type RentalServices =
-    { GetNodaInstant: unit -> NodaTime.Instant
+    { GetInstant: unit -> Instant
       WithdrawAmount: Amount -> UserId -> Async<bool> }

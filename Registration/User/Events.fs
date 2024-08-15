@@ -1,7 +1,7 @@
 ﻿namespace Registration.User
 
 open System
-open Registration.Fundamentals
+open Shared.Types
 
 module Events =
     type UserId = UserId of Guid

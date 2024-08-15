@@ -1,7 +1,7 @@
 ﻿namespace Accounting.Wallet
 
 open System
-open Accounting
+open Shared.Types
 
 type WalletId = WalletId of Guid
 type UserId = UserId of Guid

@@ -46,7 +46,7 @@ module FacadesCreator =
         let uiChangedEvent = Event<string * obj>()
 
         let accountingServices =
-            { AccountingServices.GetNodaInstant = Services.getNodaInstant }
+            { AccountingServices.GetInstant = Services.getInstant }
 
         let accountingChanged msg (WalletId walletId) =
             uiChangedEvent.Trigger(walletId.ToString(), msg)
@@ -59,7 +59,7 @@ module FacadesCreator =
 
         let registrationServices =
             { RegistrationServices.GenerateVerificationCode = Fakes.generateVerificationCode
-              GetNodaInstant = Services.getNodaInstant
+              GetInstant = Services.getInstant
               SendVerificationCode = Fakes.sendVerificationCode
               GetPasswordHash = Fakes.hashPassword
               CreateAuthToken = Fakes.createAuthToken
@@ -73,7 +73,7 @@ module FacadesCreator =
             )
 
         let rentalServices = {
-            RentalServices.GetNodaInstant = Services.getNodaInstant
+            RentalServices.GetInstant = Services.getInstant
             WithdrawAmount =  Adapters.withdrawFromUserBalance accountingFacade
         }
 

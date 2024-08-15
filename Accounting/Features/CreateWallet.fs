@@ -1,8 +1,8 @@
 ﻿namespace Accounting.Features
 
 open System
-open Accounting
 open Accounting.Wallet
+open Shared.Types
 open FsToolkit.ErrorHandling
 
 [<RequireQualifiedAccess>]

@@ -3,6 +3,7 @@
 open System
 open Rental
 open Rental.Booking
+open Shared.Types
 open FsToolkit.ErrorHandling
 
 module ReleaseBike =
@@ -22,7 +23,9 @@ module ReleaseBike =
                 Booking.projectSingle bookingEvents
                 |> Result.requireSome RentalErrors.BookingNotFound
 
-            do! booking.End |> Result.requireNone RentalErrors.BikeAlreadyReleased
+            do! 
+                booking.End 
+                |> Result.requireNone RentalErrors.BikeAlreadyReleased
 
             do!
                 persistBookingEvent

@@ -1,7 +1,7 @@
 ﻿namespace Rental.Booking
 
-open Rental
 open Rental.Bike
+open Shared.Types
 
 type Booking =
     { BookingId: BookingId

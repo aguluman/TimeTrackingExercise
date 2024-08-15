@@ -1,7 +1,10 @@
 ﻿namespace Starter
 
 open System
+open Shared.Types
 
 module Services =
-    let getNodaInstant () =
-        DateTime.UtcNow |> NodaTime.Instant.FromDateTimeUtc
+    let getInstant () =
+        DateTime.UtcNow 
+        |> NodaTime.Instant.FromDateTimeUtc 
+        |> Instant

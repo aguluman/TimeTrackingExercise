@@ -1,7 +1,7 @@
 ﻿module Tests.Rental.Booking.StatusComputation
 
-open Rental
 open Rental.Booking
+open Shared.Types
 open Tests
 open Xunit
 open Swensen.Unquote

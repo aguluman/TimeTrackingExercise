@@ -29,15 +29,15 @@
         <PackageReference Include="FSharp.Data" Version="6.4.0"/>
         <PackageReference Include="FSharp.Data.Json" Version="1.0.0"/>
         <PackageReference Include="FSharp.Data.JsonProvider" Version="0.5.0"/>
-        <PackageReference Include="FSharpx.Extras" Version="3.2.1"/>
-        <PackageReference Include="FsToolkit.ErrorHandling" Version="4.16.0"/>
-        <PackageReference Include="FsToolkit.ErrorHandling.TaskResult" Version="4.16.0"/>
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5"/>
-        <PackageReference Include="NodaTime" Version="3.1.11"/>
     </ItemGroup>
 
     <ItemGroup>
         <Content Include="bikes.json"/>
         <Content Include="sample.json"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Shared\Shared.fsproj" />
     </ItemGroup>
 </Project>
