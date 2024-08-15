@@ -25,4 +25,5 @@ type RentalFacade(services: RentalServices, storages: RentalStorages, bikesUiCha
         ReleaseBike.execute
             storages.BookingEvents.PersistEvent
             storages.BookingEvents.GetEventsOfBooking
+            bikesUiChangedFromRental
             getInstant

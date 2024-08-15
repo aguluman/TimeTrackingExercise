@@ -11,6 +11,7 @@ module ReleaseBike =
     let execute
         (persistBookingEvent: BookingEvent -> Async<unit>)
         (queryBookingEvents: BookingId -> Async<BookingEvent list>)
+        (triggerUiChange: unit -> unit)
         (getInstant: unit -> Instant)
         (data: Data)
         =
@@ -30,4 +31,6 @@ module ReleaseBike =
                       BikeId = booking.BikeId
                       Data = Released
                       Instant = getInstant () }
+
+            do triggerUiChange ()
         }

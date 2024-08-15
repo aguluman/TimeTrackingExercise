@@ -13,7 +13,7 @@ type Booking =
 type AvailabilityStatus =
     | Bookable
     | NotAvailable
-    | Releasable
+    | Releasable of BookingId
 
 [<RequireQualifiedAccess>]
 module Booking =
@@ -62,6 +62,6 @@ module Booking =
         | true -> 
             let lastBooking = unreleasedBookings |> List.last
             match lastBooking.UserId = userId with
-            | true -> Releasable
+            | true -> Releasable lastBooking.BookingId
             | false -> NotAvailable
         | false -> Bookable
