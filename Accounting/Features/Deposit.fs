@@ -8,14 +8,14 @@ open FsToolkit.ErrorHandling
 
 [<RequireQualifiedAccess>]
 module Deposit =
-    type Data = { UserId: UserId; Amount: Amount }
+    type DataForDeposit = { UserId: UserIdForWallet; Amount: Amount }
 
     let execute
-        (getEventsByUserId: UserId -> Async<WalletEvent list>)
+        (getEventsByUserId: UserIdForWallet -> Async<WalletEvent list>)
         (persistWalletEvent: WalletEvent -> Async<unit>)
         (getInstant: unit -> Instant)
         (triggerUiChange: WalletId -> unit)
-        (data: Data)
+        (data: DataForDeposit)
         =
         asyncResult {
             let! events = getEventsByUserId data.UserId

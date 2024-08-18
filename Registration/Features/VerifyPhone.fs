@@ -7,7 +7,7 @@ open Registration.Verification.Model
 open FsToolkit.ErrorHandling
 
 module VerifyPhone =
-    type Data =
+    type DataForVerifyPhone =
         { Email: Email
           VerificationCode: VerificationCode }
 
@@ -16,7 +16,7 @@ module VerifyPhone =
         (queryUser: Email -> Async<UserState>)
         (queryOpenVerification: Email -> Async<OpenVerification option>)
         (removeOpenVerification: Email -> Async<unit>)
-        (data: Data)
+        (data: DataForVerifyPhone)
         =
         asyncResult {
             let! userState = queryUser data.Email

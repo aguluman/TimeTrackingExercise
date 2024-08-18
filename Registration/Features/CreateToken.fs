@@ -9,7 +9,7 @@ type AuthToken = AuthToken of string
 
 [<RequireQualifiedAccess>]
 module CreateToken =
-    type Data =
+    type DataForCreateToken =
         {
             Email : Email
             Password : string
@@ -19,7 +19,7 @@ module CreateToken =
         (queryUser: Email -> Async<UserState>)
         (hash: string -> PasswordHash)
         (createToken: User -> AuthToken)
-        (data: Data)
+        (data: DataForCreateToken)
         =
         asyncResult {
             let! userState = queryUser data.Email

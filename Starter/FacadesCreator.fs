@@ -19,21 +19,20 @@ module Adapters =
     let createWallet (facade: AccountingFacade) (Registration.User.Events.UserId userId) =
         facade.CreateWallet
             (Guid.NewGuid() |> WalletId)
-            { CreateWallet.Data.UserId = UserId userId }
+            { CreateWallet.DataForCreateWallet.UserId = UserIdForWallet userId }
 
     let withdrawFromUserBalance
         (facade: AccountingFacade)
-        (Amount amount)
-        (Rental.Booking.UserId userId)
+        (amount: Shared.Types.Amount)
+        (Rental.Booking.UserIdForBooking userId)
         =
         async {
-            let accountingUserId = UserId userId
-            let accountingAmount = Accounting.Wallet.Amount amount
+            let accountingUserId = UserIdForWallet userId
 
             let! result =
                 facade.Withdraw
-                    { Withdraw.Data.UserId =  accountingUserId
-                      Amount = accountingAmount }
+                    { Withdraw.DataForWithdraw.UserId =  accountingUserId
+                      Amount = amount }
 
             return
                 match result with

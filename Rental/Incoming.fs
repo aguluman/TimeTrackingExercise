@@ -25,4 +25,4 @@ module RentalStorageCreator =
 
 type RentalServices =
     { GetInstant: unit -> Instant
-      WithdrawAmount: Amount -> UserId -> Async<bool> }
+      WithdrawAmount: Amount -> UserIdForBooking -> Async<bool> }

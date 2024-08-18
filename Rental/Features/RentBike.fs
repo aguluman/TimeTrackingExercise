@@ -9,17 +9,17 @@ open FsToolkit.ErrorHandling
 
 [<RequireQualifiedAccess>]
 module RentBike =
-    type Data = { BikeId: BikeId; UserId: UserId }
+    type DataForRentBike = { BikeId: BikeId; UserId: UserIdForBooking }
 
     let execute
         (persistBookingEvent: BookingEvent -> Async<unit>)
         (queryBookingEventsOfBike: BikeId -> Async<BookingEvent list>)
         (queryBike: BikeId -> Async<Bike option>)
-        (withdrawAmount: Amount -> UserId ->  Async<bool>)
+        (withdrawAmount: Amount -> UserIdForBooking ->  Async<bool>)
         (triggerUiChanged: unit -> unit)
         (getInstant: unit -> Instant)
         bookingId
-        (data: Data)
+        (data: DataForRentBike)
         =
         asyncResult {
             let! bookingEventsOfBike = queryBookingEventsOfBike data.BikeId

@@ -1,7 +1,7 @@
 ﻿namespace Rental.Bike
 
 open System
-open Rental
+open Shared.Types
 
 type BikeId = BikeId of Guid
 

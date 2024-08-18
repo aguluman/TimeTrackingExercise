@@ -7,14 +7,14 @@ open Shared.Types
 open FsToolkit.ErrorHandling
 
 module ReleaseBike =
-    type Data = { BookingId: BookingId }
+    type DataForReleaseBike = { BookingId: BookingId }
 
     let execute
         (persistBookingEvent: BookingEvent -> Async<unit>)
         (queryBookingEvents: BookingId -> Async<BookingEvent list>)
         (triggerUiChange: unit -> unit)
         (getInstant: unit -> Instant)
-        (data: Data)
+        (data: DataForReleaseBike)
         =
         asyncResult {
             let! bookingEvents = queryBookingEvents data.BookingId

@@ -9,7 +9,7 @@ open Shared.Types
 
 [<RequireQualifiedAccess>]
 module CompleteRegistration =
-    type Data =
+    type DataForCompleteRegistration =
         { Email: Email
           CompletionId: RegistrationCompletionId
           FirstName: string
@@ -22,7 +22,7 @@ module CompleteRegistration =
         (createWallet: UserId -> Async<Result<unit, obj>>)
         (hash: string -> PasswordHash)
         (getInstant: unit -> Instant)
-        (data: Data)
+        (data: DataForCompleteRegistration)
         =
         asyncResult {
             let! userState = queryUser data.Email

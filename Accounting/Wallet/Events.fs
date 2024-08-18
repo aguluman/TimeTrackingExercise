@@ -4,8 +4,7 @@ open System
 open Shared.Types
 
 type WalletId = WalletId of Guid
-type UserId = UserId of Guid
-type Amount = Amount of decimal
+type UserIdForWallet = UserIdForWallet of Guid
 
 type WalletEventData =
     | Created
@@ -14,7 +13,7 @@ type WalletEventData =
 
 type WalletEvent =
     { WalletId: WalletId
-      UserId: UserId
+      UserId: UserIdForWallet
       EventId: Guid
       Data: WalletEventData
       Instant: Instant }

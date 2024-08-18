@@ -8,6 +8,7 @@ open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Mvc.ApplicationParts
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Hosting
+open Microsoft.OpenApi.Models
 open Registration
 open Accounting
 open Rental
@@ -46,6 +47,10 @@ module Program =
             .AddSingleton<RentalFacade>(fun _ -> facades.Rental)
         |> ignore
 
+        // Add Swagger services
+        builder.Services.AddSwaggerGen(fun c ->
+            c.SwaggerDoc("v1", OpenApiInfo(Title = "My Bike-Rental API", Version = "v1"))
+        )
         let eventStream =
             builder.Services.BuildServiceProvider().GetService<Event<string * obj>>()
 
@@ -60,8 +65,15 @@ module Program =
         app.UseAuthorization()
         app.UseWebSockets()
         app.MapControllers()
-        app.Use(WebSocket.wsMiddleware (eventStream.Publish))
+        app.Use(WebSocket.wsMiddleware eventStream.Publish)
+        app.UseSwagger()
 
+        // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+        // specifying the Swagger JSON endpoint.
+        app.UseSwaggerUI(fun c ->
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1")
+            c.RoutePrefix <- ""
+        )
         app.Run()
 
         0

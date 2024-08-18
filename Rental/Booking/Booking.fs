@@ -6,7 +6,7 @@ open Shared.Types
 type Booking =
     { BookingId: BookingId
       BikeId: BikeId
-      UserId: UserId
+      UserId: UserIdForBooking
       Start: Instant
       End: Instant option }
 

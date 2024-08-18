@@ -2,19 +2,16 @@
 
 open Shared.Types
 
-type Balance = Balance of decimal
 
 type Wallet =
     { WalletId: WalletId
-      UserId: UserId
+      UserId: UserIdForWallet
       Balance: Balance }
 
 module Wallet =
     let project (events: WalletEvent list) =
         events
-        |> List.sortBy (fun x ->
-            let (Instant instant) = x.Instant
-            instant.ToUnixTimeTicks())
+        |> List.sortBy (_.Instant)
         |> List.fold
             (fun oldState event ->
                 match oldState, event.Data with

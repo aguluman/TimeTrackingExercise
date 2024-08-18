@@ -7,9 +7,14 @@ open FsToolkit.ErrorHandling
 
 [<RequireQualifiedAccess>]
 module CreateWallet =
-    type Data = { UserId: UserId }
+    type DataForCreateWallet = { UserId: UserIdForWallet }
 
-    let execute (persistWalletEvent: WalletEvent -> Async<unit>) (getInstant: unit -> Instant) walletId (data: Data) =
+    let execute
+        (persistWalletEvent: WalletEvent -> Async<unit>)
+        (getInstant: unit -> Instant)
+        walletId
+        (data: DataForCreateWallet)
+        =
         asyncResult {
             do!
                 persistWalletEvent

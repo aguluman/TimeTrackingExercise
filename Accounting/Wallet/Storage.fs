@@ -2,7 +2,7 @@
 
 type WalletEventStorage =
     abstract PersistEvent: WalletEvent -> Async<unit>
-    abstract GetWalletEventsByUserId: UserId -> Async<WalletEvent list>
+    abstract GetWalletEventsByUserId: UserIdForWallet -> Async<WalletEvent list>
     abstract GetWalletEvents: WalletId -> Async<WalletEvent list>
 
 module WalletEventInMemoryStorage =

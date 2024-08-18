@@ -10,7 +10,7 @@ open Shared.Types
 
 [<RequireQualifiedAccess>]
 module StartRegistration =
-    type Data =
+    type DataForStartRegistration =
         { Email: Email
           PhoneNumber: PhoneNumber }
 
@@ -23,7 +23,7 @@ module StartRegistration =
         (getInstant: unit -> Instant)
         userId
         completionId
-        (data: Data)
+        (data: DataForStartRegistration)
         =
         asyncResult {
             let! userState = queryUser data.Email

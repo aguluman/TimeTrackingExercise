@@ -5,10 +5,10 @@ open Rental.Bike
 open Shared.Types
 
 type BookingId = BookingId of Guid
-type UserId = UserId of Guid
+type UserIdForBooking = UserIdForBooking of Guid
 
 type BookingEventData =
-    | Booked of UserId
+    | Booked of UserIdForBooking
     | Released
 
 type BookingEvent =

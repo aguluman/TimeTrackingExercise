@@ -8,13 +8,12 @@ open Microsoft.AspNetCore.Authorization
 [<ApiController>]
 [<Authorize(AuthenticationSchemes = "FakeAuthenticationScheme")>]
 [<Route("accounting")>]
-type AccountingController(facade: AccountingFacade) =
+type AccountingApiController(facade: AccountingFacade) =
     inherit ControllerBase()
 
     [<HttpGet>]
     [<Route("user/{userId}/wallet")>]
-    [<Route("user/{userId}/wallet")>]
-    member self.GetWalletOfUser([<FromRoute>] userId: Guid) = facade.GetWalletOfUser(UserId userId)
+    member self.GetWalletOfUser([<FromRoute>] userId: Guid) = facade.GetWalletOfUser(UserIdForWallet userId)
 
     [<HttpGet>]
     [<Route("wallet/{walletId}")>]

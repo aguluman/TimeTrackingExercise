@@ -9,13 +9,13 @@ open Rental.Booking
 [<ApiController>]
 [<Authorize(AuthenticationSchemes = "FakeAuthenticationScheme")>]
 [<Route("rental")>]
-type RegistrationApiController(facade: RentalFacade) =
+type RentalApiController(facade: RentalFacade) =
     inherit ControllerBase()
 
     [<HttpGet>]
     [<Route("bikes/{userId}")>]
     member self.GetAllBikes()([<FromRoute>] userId) =
-        facade.GetAllBookableBikes (UserId userId)
+        facade.GetAllBookableBikes (UserIdForBooking userId)
 
     [<HttpPost>]
     [<Route("rent")>]
