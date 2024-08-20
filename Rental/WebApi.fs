@@ -5,6 +5,8 @@ open Microsoft.AspNetCore.Authorization
 open Microsoft.AspNetCore.Mvc
 open FsToolkit.ErrorHandling
 open Rental.Booking
+open Shared.Types
+
 
 [<ApiController>]
 [<Authorize(AuthenticationSchemes = "FakeAuthenticationScheme")>]
@@ -15,7 +17,7 @@ type RentalApiController(facade: RentalFacade) =
     [<HttpGet>]
     [<Route("bikes/{userId}")>]
     member self.GetAllBikes()([<FromRoute>] userId) =
-        facade.GetAllBookableBikes (UserIdForBooking userId)
+        facade.GetAllBookableBikes (UserId userId)
 
     [<HttpPost>]
     [<Route("rent")>]

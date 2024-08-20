@@ -4,7 +4,6 @@ open System
 open Shared.Types
 
 module Events =
-    type UserId = UserId of Guid
     type Email = Email of string
     type PhoneNumber = PhoneNumber of string
     type PasswordHash = PasswordHash of string

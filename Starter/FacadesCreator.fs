@@ -16,28 +16,22 @@ type Facades =
       Rental: RentalFacade }
 
 module Adapters =
-    let createWallet (facade: AccountingFacade) (Registration.User.Events.UserId userId) =
+    let createWallet (facade: AccountingFacade)  userId= 
         facade.CreateWallet
             (Guid.NewGuid() |> WalletId)
-            { CreateWallet.DataForCreateWallet.UserId = UserIdForWallet userId }
+            { CreateWallet.Data.UserId = userId }
 
     let withdrawFromUserBalance
-        (facade: AccountingFacade)
-        (amount: Shared.Types.Amount)
-        (Rental.Booking.UserIdForBooking userId)
-        =
+        (facade: AccountingFacade) amount userId  =
         async {
-            let accountingUserId = UserIdForWallet userId
-
             let! result =
                 facade.Withdraw
-                    { Withdraw.DataForWithdraw.UserId =  accountingUserId
+                    { Withdraw.DataForWithdraw.UserId = userId
                       Amount = amount }
-
-            return
+            return 
                 match result with
                 | Ok _ -> true
-                | _ -> false
+                | _ -> false          
         }
 
 module FacadesCreator =

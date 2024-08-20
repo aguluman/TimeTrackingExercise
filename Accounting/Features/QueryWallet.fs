@@ -2,11 +2,12 @@
 
 open Accounting
 open Accounting.Wallet
+open Shared.Types
 open FsToolkit.ErrorHandling
 
 [<RequireQualifiedAccess>]
 module QueryWallet =
-    let queryByUser (getEventsByUserId: UserIdForWallet -> Async<WalletEvent list>) userId =
+    let queryByUser (getEventsByUserId: UserId -> Async<WalletEvent list>) userId =
         asyncResult {
             let! events = getEventsByUserId userId
 

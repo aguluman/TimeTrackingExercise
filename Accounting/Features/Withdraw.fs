@@ -8,10 +8,10 @@ open FsToolkit.ErrorHandling
 
 [<RequireQualifiedAccess>]
 module Withdraw =
-    type DataForWithdraw = { UserId: UserIdForWallet; Amount: Amount }
+    type DataForWithdraw = { UserId: UserId; Amount: Amount }
 
     let execute
-        (getEventsByUserId: UserIdForWallet -> Async<WalletEvent list>)
+        (getEventsByUserId: UserId -> Async<WalletEvent list>)
         (persistWalletEvent: WalletEvent -> Async<unit>)
         (getInstant: unit -> Instant)
         (triggerUIChange: WalletId -> unit)

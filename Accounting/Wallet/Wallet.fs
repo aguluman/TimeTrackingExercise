@@ -5,7 +5,7 @@ open Shared.Types
 
 type Wallet =
     { WalletId: WalletId
-      UserId: UserIdForWallet
+      UserId: UserId
       Balance: Balance }
 
 module Wallet =

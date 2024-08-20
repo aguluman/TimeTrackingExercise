@@ -6,6 +6,7 @@ open Registration.Features
 open Registration.User
 open Registration.User.Events
 open Registration.Verification.Model
+open Shared.Types
 
 module Fakes =
     let generateVerificationCode () = VerificationCode "Xyz"

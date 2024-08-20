@@ -2,6 +2,7 @@
 
 open Accounting.Wallet
 open Shared.Types
+
 type AccountingStorages = { WalletEvents: WalletEventStorage }
 
 type SqlContext = { ConnectionString: string }

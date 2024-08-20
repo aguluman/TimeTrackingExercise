@@ -2,6 +2,7 @@
 
 open System
 open Accounting.Wallet
+open Shared.Types
 open Microsoft.AspNetCore.Mvc
 open Microsoft.AspNetCore.Authorization
 
@@ -13,7 +14,7 @@ type AccountingApiController(facade: AccountingFacade) =
 
     [<HttpGet>]
     [<Route("user/{userId}/wallet")>]
-    member self.GetWalletOfUser([<FromRoute>] userId: Guid) = facade.GetWalletOfUser(UserIdForWallet userId)
+    member self.GetWalletOfUser([<FromRoute>] userId: Guid) = facade.GetWalletOfUser(UserId userId)
 
     [<HttpGet>]
     [<Route("wallet/{walletId}")>]

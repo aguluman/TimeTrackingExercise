@@ -25,6 +25,14 @@ module Program =
         |> ignore
 
         builder.Services.AddAuthorization |> ignore
+        builder.Services.AddCors(fun options ->
+            options.AddPolicy("AllowSpecificOrigin", fun builder ->
+                builder.WithOrigins("")
+                       .AllowAnyHeader()
+                       .AllowAnyMethod()
+                       .AllowCredentials() |> ignore
+            )
+        ) |> ignore
 
         let registrationAssemblyPart = typeof<RegistrationFacade>.Assembly |> AssemblyPart
         let accountingAssemblyPart = typeof<AccountingId>.Assembly |> AssemblyPart

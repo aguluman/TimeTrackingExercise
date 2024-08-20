@@ -1,5 +1,7 @@
 ﻿namespace Shared
 
+open System
+
 module Types =
     [<CustomEquality; CustomComparison>]
     type Instant = 
@@ -33,3 +35,6 @@ module Types =
         | Balance of decimal
         static member (-) (Balance balance, Price price) = Balance (balance - price)
         static member (-) (Balance balance, Amount amount) = Balance (balance - amount)
+        static member (+) (Balance balance, Amount amount) = Balance (balance + amount)
+
+    type UserId = UserId of Guid

@@ -1,6 +1,7 @@
 ﻿namespace Registration.User
 
 open Registration.User.Events
+open Shared.Types
 
 type User =
     { UserId: UserId
