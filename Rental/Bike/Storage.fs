@@ -1,7 +1,6 @@
 ﻿namespace Rental.Bike
 
 open FSharp.Data
-open Shared.Types
 
 type BikeStorage =
     abstract GetAll: unit -> Async<Bike list>

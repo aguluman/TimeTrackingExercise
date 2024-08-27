@@ -36,10 +36,8 @@ module RentBike =
                 queryBike data.BikeId
                 |> Async.map (Result.requireSome RentalErrors.BikeNotFound)
 
-            let amount = bike.Price |> (fun (Price p) -> Amount p)
-
             do!
-                withdrawAmount amount data.UserId
+                withdrawAmount (bike.Price |> Price.toAmount) data.UserId
                 |> Async.map(Result.requireTrue RentalErrors.UserBalanceNotSufficient)
 
             do!
