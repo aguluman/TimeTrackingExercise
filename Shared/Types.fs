@@ -4,17 +4,18 @@ open System
 
 module Types =
     [<CustomEquality; CustomComparison>]
-    type Instant = 
+    type Instant =
         | Instant of NodaTime.Instant
-        member a.innerCompareTo(b: obj) =
-            let nodaA = a |> (fun (Instant x) -> x)
-            
-            let instantB =
-                match b with 
-                | :? Instant as instant -> instant
-                | _ -> Instant NodaTime.Instant.MinValue
 
-            let nodaB = instantB |> (fun (Instant x) -> x)
+        member a.innerCompareTo(b: obj) =
+            let (Instant nodaA) = a
+
+            let nodaB =
+                match b with
+                | :? Instant as instant ->
+                    let (Instant noda) = instant
+                    noda
+                | _ -> NodaTime.Instant.MinValue
 
             match nodaA.ToUnixTimeTicks() - nodaB.ToUnixTimeTicks() with
             | x when x < 0L -> -1
@@ -24,17 +25,19 @@ module Types =
 
         interface System.IComparable with
             override a.CompareTo(b) = a.innerCompareTo b
+
         override a.Equals(b) = a.innerCompareTo b = 0
-        
-        override x.GetHashCode() = 
-            let nodaX = x |> (fun (Instant x) -> x)
+
+        override x.GetHashCode() =
+            let (Instant nodaX) = x
             nodaX.GetHashCode()
 
     type Amount = Amount of decimal
 
     type Balance =
         | Balance of decimal
-        static member (-) (Balance balance, Amount amount) = Balance (balance - amount)
-        static member (+) (Balance balance, Amount amount) = Balance (balance + amount)
+
+        static member (-)(Balance balance, Amount amount) = Balance(balance - amount)
+        static member (+)(Balance balance, Amount amount) = Balance(balance + amount)
 
     type UserId = UserId of Guid

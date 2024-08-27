@@ -26,8 +26,8 @@ module Fakes =
         PasswordHash result
 
     let createAuthToken (user: User) =
-        let email = user.Email |> (fun (Email e) -> e)
-        let userId = user.UserId |> (fun (UserId u) -> u.ToString())
-        let result = $"thisIsAFakeToken+{email}+{userId}"
+        let (Email email) = user.Email
+        let (UserId userId) = user.UserId
+        let result = $"thisIsAFakeToken+{email}+{userId.ToString()}"
 
         AuthToken result
