@@ -1,4 +1,4 @@
-﻿namespace Accounting
+﻿namespace Starter
 
 open System
 open System.Net.WebSockets
