@@ -76,7 +76,7 @@ module Program =
         app.Use(WebSocket.wsMiddleware eventStream.Publish)
         app.UseSwagger()
 
-        // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+        // Enable middleware to serve swagger-ui,
         // specifying the Swagger JSON endpoint.
         app.UseSwaggerUI(fun c ->
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1")
